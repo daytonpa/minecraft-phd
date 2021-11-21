@@ -1,0 +1,14 @@
+[Unit]
+Description=Minecraft Server
+After=network.target
+
+[Service]
+Type=Simple
+User=minecraft
+Group=minecraft
+PIDFile=/opt/minecraft/run/minecraft.pid
+ExecStart=java -Xmx1024M -Xms1024M -Dlog4j.configurationFile=/opt/minecraft/etc/log4j.xml  -jar /opt/minecraft/jars/server.jar nogui
+ExecStop=/bin/kill -s QUIT ${MAINPID}
+
+[Install]
+WantedBy=multi-user.target
